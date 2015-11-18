@@ -5,7 +5,16 @@ angular.module('todoController', [])
     .controller('mainController', function($scope, $http, Todos) {
         $scope.formData = {};
         $scope.loading = true;
-
+        
+    // GET =====================================================================
+		// when landing on the page, get all todos and show them
+		// use the service to get all the todos
+		Todos.get()
+			.success(function(data) {
+				$scope.todos = data;
+				$scope.loading = false;
+			});
+    
         // CREATE ==================================================================
 		// when submitting the add form, send the text to the node API
 		$scope.createTodo = function() {
